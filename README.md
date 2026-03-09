@@ -1,20 +1,30 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# CryptoDash ARS - GitHub Pages Deployment
 
-# Run and deploy your AI Studio app
+This project is prepared for deployment to GitHub Pages.
 
-This contains everything you need to run your app locally.
+## Deployment Steps
 
-View your app in AI Studio: https://ai.studio/apps/c6dfea38-589f-4487-921f-cc15f08afb7b
+1. **Initialize Git Repository** (if not already done):
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   ```
 
-## Run Locally
+2. **Add Remote Origin**:
+   Replace `<username>` and `<repo-name>` with your GitHub details.
+   ```bash
+   git remote add origin https://github.com/<username>/<repo-name>.git
+   ```
 
-**Prerequisites:**  Node.js
+3. **Deploy**:
+   Run the following command to build the project and push it to the `gh-pages` branch:
+   ```bash
+   npm run deploy
+   ```
 
+## Configuration Note
+The `vite.config.ts` has been updated with `base: './'` to ensure that assets are correctly linked regardless of whether the app is hosted at the root domain or a subpath.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Environment Variables
+Since this app uses the CoinGecko public API, no API keys are strictly required for the current functionality. If you add features requiring the Gemini API, remember that client-side environment variables in GitHub Pages are public.
