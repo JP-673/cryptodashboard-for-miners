@@ -1,0 +1,5 @@
+{
+  "name": "CryptoDash ARS",
+  "description": "Real-time cryptocurrency dashboard with BTC, ETH, and Monero prices in USD and ARS.",
+  "requestFramePermissions": []
+}
