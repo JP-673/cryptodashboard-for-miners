@@ -59,6 +59,7 @@ export default function App() {
           btc: result.bitcoin.usd,
           eth: result.ethereum.usd,
           xmr: result.monero.usd,
+          rtm: result.raptoreum.usd,
         };
         const updated = [...prev, newEntry].slice(-20); // Keep last 20 points
         return updated;
@@ -86,6 +87,7 @@ export default function App() {
       { from: 'bitcoin', to: 'ethereum' },
       { from: 'bitcoin', to: 'monero' },
       { from: 'ethereum', to: 'monero' },
+      { from: 'raptoreum', to: 'bitcoin' },
     ];
 
     return pairs.map(pair => {
@@ -107,6 +109,7 @@ export default function App() {
     if (calcBase === 'BTC') usdValue = data.bitcoin.usd;
     else if (calcBase === 'ETH') usdValue = data.ethereum.usd;
     else if (calcBase === 'XMR') usdValue = data.monero.usd;
+    else if (calcBase === 'RTM') usdValue = data.raptoreum.usd;
     else if (calcBase === 'USD') usdValue = 1;
     else if (calcBase === 'ARS') {
       // Approximate ARS/USD from the data we have
@@ -121,6 +124,7 @@ export default function App() {
       { label: 'Bitcoin', symbol: 'BTC', value: totalUsd / data.bitcoin.usd, type: 'crypto' },
       { label: 'Ethereum', symbol: 'ETH', value: totalUsd / data.ethereum.usd, type: 'crypto' },
       { label: 'Monero', symbol: 'XMR', value: totalUsd / data.monero.usd, type: 'crypto' },
+      { label: 'Raptoreum', symbol: 'RTM', value: totalUsd / data.raptoreum.usd, type: 'crypto' },
       { label: 'US Dollar', symbol: 'USD', value: totalUsd, type: 'fiat' },
       { label: 'Argentine Peso', symbol: 'ARS', value: totalUsd * arsPerUsd, type: 'fiat' },
     ].filter(item => item.symbol !== calcBase);
@@ -160,7 +164,7 @@ export default function App() {
       )}
 
       {/* Main Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {CRYPTO_IDS.map((id) => {
           const crypto = data?.[id as keyof CryptoData];
           const symbol = SYMBOLS[id];
@@ -241,6 +245,7 @@ export default function App() {
               <option value="BTC">Bitcoin (BTC)</option>
               <option value="ETH">Ethereum (ETH)</option>
               <option value="XMR">Monero (XMR)</option>
+              <option value="RTM">Raptoreum (RTM)</option>
               <option value="USD">US Dollar (USD)</option>
               <option value="ARS">Argentine Peso (ARS)</option>
             </select>
@@ -251,7 +256,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {calculatorResults.map((res, idx) => (
             <div key={idx} className="p-4 bg-zinc-950/50 rounded-xl border border-zinc-800/30 space-y-1">
               <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest">{res.label}</p>
